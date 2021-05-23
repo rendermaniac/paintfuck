@@ -1,6 +1,6 @@
 # What is Brainfuck?
 
-Brainfuck is an [esoteric language](https://esolangs.org/wiki/Brainfuck) with very few operators that is Turing complete. In fact it bears a lot of resemblance to a Turing machine. The operators are:
+Brainfuck is an [esoteric language](https://esolangs.org/wiki/Brainfuck)  created by Urban Müller with very few operators, and is Turing complete. In fact it bears a lot of resemblance to a Turing machine. The operators are:
 
 | Operator | Description |
 --- | ---
@@ -17,7 +17,7 @@ The obvious answer is why not!
 
 It seemed like an interesting exercise to generate images using brainfuck and I couldn't find an example of it done before.
 
-There are some very impressive examples (far more so than mine!) available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php).
+There are some very impressive examples (far more so than mine!) available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) written by Erik Bosman and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php) written by Linus Akesson.
 
 # Brainfuck specific Issues
 
