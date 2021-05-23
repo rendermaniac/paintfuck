@@ -11,6 +11,14 @@ Brainfuck is an [esoteric language](https://esolangs.org/wiki/Brainfuck) with ve
 |\[|Start a loop. Jump to the next \] when current cell is zero|
 |\]|End a loop. Jump to the previous \[|
 
+# Why brainfuck?!
+
+The obvious answer is why not!
+
+It seemed like an interesting exercise to generate images using brainfuck and I couldn't find an example of it done before.
+
+There are some very impressive examples (far more so than mine!) available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php).
+
 An amazing example of what brainfuck is capable of is this video about [AI in brainfuck](https://www.youtube.com/watch?v=qK0vmuQib8Y). Many of the tricks from this video will be useful in your own brainfuck programs. The main loop I use in this project comes directly from this video.
 
 # Brainfuck specific Issues
@@ -65,10 +73,6 @@ My fork - included in this project just adds:
 - Reading in bf files from disk
 - Reading program input from the command line
 - Outputting to a ppm file which gets written to when printing characters 
-
-# Why generate images from brainfuck
-
-The obvious answer is why not! It seemed like an interesting exercise and I couldn't find an example of it done before. There are some very impressive examples available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php).
 
 # What image format to use?
 
