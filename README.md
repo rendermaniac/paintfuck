@@ -70,14 +70,32 @@ My fork - included in this project just adds:
 
 The obvious answer is why not! It seemed like an interesting exercise and I couldn't find an example of it done before. There are some very impressive examples available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php).
 
+# What image format to use?
+
+By necessity, brainfuck requires some features in any image format we want to write:
+
+- it has to be very simple with as minimal a header as possible
+- it has to be able to store ASCII data as we have no option of binary output (unless we post convert, but that is cheating a bit)
+
+The [PPM image format](http://www.paulbourke.net/dataformats/ppm/) fits this bill perfectly with it's P3 ASCII format. The header has a single magic number, resolution and quantization and then pixel data.
+
+One quirk of brainfuck is that each cell stores an integer, but we can only output single ASCII characters. This means that if we want to output a value higher than 9 then we need to print two characters. To do this we have 2 options:
+
+- Determine the values by using modulus to split into hundreds, tens and units. This is probably the most robbust approach, but is complicated
+- Use multiple cells to store values. This is much simpler to work with, but makes any image manipulation harder. This is the approach I took.
+
+# Procedural Patterns
+
+It should be possible to generate some procedural patterns using brainfuck by using multiple passes to fill the image buffer. Potential extension ideas are:
+
+- Split image colours horizontally
+- Split image colours vertically
+- Split image colours diagonally
+- Checkerboard pattern
+- Cross
+- Quarter circle - using pythagoras
+- Full Circle
+
 ## Raytracing in Brainfuck
 
 Could it be done? I am sure it could! Am I going to do it? Probably not. To get this working the easiest starting point would be to write it in another language and use one of the many compilers available to convert it to brainfuck. Understanding anything to debug in brainfuck would really make the language live up to it's name. I would love to see someone try this though!
-
-
-
-PPM image format
-
-http://www.paulbourke.net/dataformats/ppm/
-
-
