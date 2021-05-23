@@ -1,34 +1,83 @@
+# What is Brainfuck?
 
-AI in brainfuck
+Brainfuck is an [esoteric language](https://esolangs.org/wiki/Brainfuck) with very few operators that is Turing complete. In fact it bears a lot of resemblance to a Turing machine. The operators are:
 
-https://www.youtube.com/watch?v=qK0vmuQib8Y
+| Operator | Description |
+--- | ---
+|+|Increment the current cell by one|
+|-|Decrement the current cell by one|
+|<|Move one cell to the left|
+|>|Move one cell to the right|
+|\[|Start a loop. Jump to the next \] when current cell is zero|
+|\]|End a loop. Jump to the previous \[|
+
+An amazing example of what brainfuck is capable of is this video about [AI in brainfuck](https://www.youtube.com/watch?v=qK0vmuQib8Y). Many of the tricks from this video will be useful in your own brainfuck programs. The main loop I use in this project comes directly from this video.
+
+# Brainfuck specific Issues
+
+## No variables
+
+We only have a single pointer to the current cell value. This makes finding other values hard as we need to know how many cells we need to jump to get to the next value
+
+## No Basic maths operators!
+
+We can only increment and decrement a value as built in operators. If we want to add or multiply two cell values we need to program this ourselves - and this often needs several temporary cells. Most of these are easy to find examples - such as [multiplication](
+https://stackoverflow.com/questions/5165772/code-for-multiplying-two-one-digit-numbers-in-brainfuck) on Stack Overflow.
+
+## Storing program data
+
+The problems of no variables and having to write your own operators means that it can be hard to store data without corrupting it from an operation. For this reason I switched from shortened values using addition to writing them out in full - so as not to need multiple cells.
+
+This is also the reason for jumping to the end of a buffer and then filling it in backwards - so that we do not need to calculate our current position (which would require generating temporary data and jumping between cells).
+
+## ASCII
+
+It is important to remember that Brainfuck takes input and output as ASCII characters - which are then stored as ASCII codes in cells. This means that to output a zero you need to print the value 48. Having the ASCII code table handy is invaluable!
+
+https://www.ascii-code.com/
+
+I chose to store actual values on the tape, and only convert from/to ASCII for input/output as this made it easier to visualize.
+
+# Tools
+
+The most useful tool I could find was this debugging interpreter
+
+https://fatiherikli.github.io/brainfuck-visualizer/
+
+It has the advantage that you can see the operations operating on the tape in real time as it runs through the program. You can even single step - which is incredibly handy. The only disadvantages of this tool are that it can be a bit slow if you are waiting to get to a particular part of the code, and the tape size if quite limited so it is easy to run out of memory. But it is also easy to see why you are having memory errors when you run off either end of the tape!
+
+All interpreters I used are wrapping - this means the cell gets set to 255 if you decrement a zero cell by one so this was never a problem, and seems quite common with brainfuck interpreters.
+
+To run larger code, faster there is a great interpreter here, but it's disadvantage is that it gives you a lot less feedback about what the code is doing:
+
+https://copy.sh/brainfuck/
+
+They also have a handy tool to convert text to brainfuck - as it really does get boring quickly to look up each ASCI code individually if your code outputs a lot of text.
+
+https://copy.sh/brainfuck/text.html
+
+For an offline interpreter, I did start to write my own - as it really isn't that hard - but decided to download and extend an existing one in Python because it would already have all the bugs worked out. I used this one which is easy to understand and works well:
+
+https://github.com/DoctorLai/PyUtils/blob/master/bf.py
+
+My fork - included in this project just adds:
+
+- Reading in bf files from disk
+- Reading program input from the command line
+- Outputting to a ppm file which gets written to when printing characters 
+
+# Why generate images from brainfuck
+
+The obvious answer is why not! It seemed like an interesting exercise and I couldn't find an example of it done before. There are some very impressive examples available online - such as [ASCII mandelbrot fractals](https://copy.sh/brainfuck/?file=https://copy.sh/brainfuck/prog/mandelbrot.b) and [Conway's Game of Life](https://www.linusakesson.net/programming/brainfuck/index.php).
+
+## Raytracing in Brainfuck
+
+Could it be done? I am sure it could! Am I going to do it? Probably not. To get this working the easiest starting point would be to write it in another language and use one of the many compilers available to convert it to brainfuck. Understanding anything to debug in brainfuck would really make the language live up to it's name. I would love to see someone try this though!
+
+
 
 PPM image format
 
 http://www.paulbourke.net/dataformats/ppm/
 
-How to multiply 2 numbers in bf
 
-https://stackoverflow.com/questions/5165772/code-for-multiplying-two-one-digit-numbers-in-brainfuck
-
-ASCII code table
-
-https://www.ascii-code.com/
-
-Text to bf
-
-https://copy.sh/brainfuck/text.html
-
-Interpreters
-
-Debugging interpreter
-
-https://fatiherikli.github.io/brainfuck-visualizer/
-
-Fast Online interpreter
-
-https://copy.sh/brainfuck/
-
-Python Interpreter
-
-https://github.com/DoctorLai/PyUtils/blob/master/bf.py
