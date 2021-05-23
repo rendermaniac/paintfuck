@@ -128,6 +128,16 @@ Because we write out the buffer from the end forwards, we store the colours reve
 
 This was also where I encountered by first bit head scratching problem to debug. To stop the loop that fills in our cell values, we must end up with a zero in the final cell. To do this we initialize an anchor by decrementing it to exactly balance the last character of our structure - the space. It took me ages to realize that we need a full copy of the structure to end on (ie 4 junk cells before actual data) to be able to successfully stop the loop. Only the final cell matters so we fill the other cells with 255 (ie decrement once) to give us speed and not stop iteration by being zero. We then move the pointer to the start of the actual data for output.
 
+| 16 | 255 | 255 | 255 | 4 | 0 | 0 | 0 |
+--- | --- | --- | --- | --- | --- | --- | ---
+| | | | | ^ | | | |
+
+This tape is currently pointing at the loop counter, just before jumping forwards to the end of the loop
+
+To see the process better I recommend running this code in the [online visualizer](https://fatiherikli.github.io/brainfuck-visualizer/) and stepping through the code (use only 2 iterations to avoid running out of memory) to see what's happening.
+
+Note that we place this anchor just before the counter cell for our buffer, and then overwrite the counter cell with data.
+
 Outputting the data is very simple - we iterate forwards through the buffer, adding 48 before outputting to the console (and to the ppm file).
 
 ```brainfuck
