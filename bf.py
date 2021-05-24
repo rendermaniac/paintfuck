@@ -3,6 +3,7 @@
 # Brainfuck Interpreter
 
 from __future__ import print_function
+import time
 
 def pp(x, ppm):
     print(x, end="")
@@ -30,7 +31,15 @@ def bf(src, left, right, data, idx, ppm):
     while i <= right:
         s = src[i]
         if s == '#':
-            print(arr[:100])
+            ds = ''
+            for arri,arrv in enumerate(arr[:100]):
+                ds = f'{ds} {arrv}'
+                if arri == ptr:
+                    ds = f'{ds}*'
+            print(f'\n{ds}\n', end=" ")
+            time.sleep(2)
+        if s == '*':
+            return
         if s == '>':
             ptr += 1
             # wrap if out of range
@@ -82,7 +91,7 @@ if __name__ == "__main__":
 
     srcfile = sys.argv[1]
     src = open(srcfile).read()
-    src = "".join([c for c in src if c in "+-.,<>[]"]) # minify
+    src = "".join([c for c in src if c in "+-.,<>[]#*"]) # minify
 
     ppmfile = os.path.splitext(srcfile)[0] + ".ppm"
     ppm = open(ppmfile, "w")
