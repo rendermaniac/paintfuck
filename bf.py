@@ -89,15 +89,21 @@ if __name__ == "__main__":
     import sys
     import os
 
-    srcfile = sys.argv[1]
-    src = open(srcfile).read()
-    src = "".join([c for c in src if c in "+-.,<>[]#*"]) # minify
+    src = sys.argv[1]
 
-    ppmfile = os.path.splitext(srcfile)[0] + ".ppm"
-    ppm = open(ppmfile, "w")
+    if os.path.exists(src):
+        srcfile = src
+        src = open(srcfile).read()
+        src = "".join([c for c in src if c in "+-.,<>[]#*"]) # minify
+
+        ppmfile = os.path.splitext(srcfile)[0] + ".ppm"
+        ppm = open(ppmfile, "w")
 
     data = ""
     if len(sys.argv) > 2:
         data= sys.argv[2]
+        if os.path.exists(data):
+            datafile = data
+            data = open(datafile).read()
 
     bf(src, 0, len(src) - 1, data, 0, ppm)
